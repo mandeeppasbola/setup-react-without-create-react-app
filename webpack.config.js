@@ -7,7 +7,6 @@ module.exports = {
   entry: "./src/index.js",
   output: {
     path: path.resolve(__dirname, "dist"),
-    publicPath: "/",
   },
   devServer: {
     static: { directory: path.join(__dirname, "dist") },
@@ -47,9 +46,7 @@ module.exports = {
     ],
   },
   plugins: [
-    new MiniCssExtractPlugin({
-      filename: "styles.css",
-    }),
+    new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
       template: "./src/index.html",
     }),
