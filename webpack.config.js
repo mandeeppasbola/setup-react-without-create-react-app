@@ -5,7 +5,10 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = {
   mode: "development",
   entry: "./src/index.js",
-  output: { path: path.resolve(__dirname, "dist") },
+  output: {
+    path: path.resolve(__dirname, "dist"),
+    publicPath: "/",
+  },
   devServer: {
     static: { directory: path.join(__dirname, "dist") },
     port: 9000,
@@ -17,6 +20,12 @@ module.exports = {
         test: /\.scss$/,
         use: [
           { loader: "style-loader" },
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              esModule: false,
+            },
+          },
           { loader: "css-loader" },
           { loader: "sass-loader" },
         ],
@@ -35,16 +44,26 @@ module.exports = {
         test: /\.html$/i,
         loader: "html-loader",
       },
-      {
-        test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, "css-loader"],
-      },
     ],
   },
   plugins: [
-    new MiniCssExtractPlugin(),
+    new MiniCssExtractPlugin({
+      filename: "styles.css",
+    }),
     new HtmlWebpackPlugin({
       template: "./src/index.html",
     }),
   ],
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        styles: {
+          name: "styles",
+          type: "css/mini-extract",
+          chunks: "all",
+          enforce: true,
+        },
+      },
+    },
+  },
 };
