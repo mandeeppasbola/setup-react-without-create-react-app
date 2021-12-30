@@ -1,4 +1,4 @@
-# setup-react-without-create-react-app
+# setup-react-project-without-create-react-app
 Setting up a new React project from scratch without using create-react-app with react-router v6
 ```sh
 // Install dependencies
