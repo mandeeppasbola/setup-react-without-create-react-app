@@ -1,5 +1,7 @@
 # setup-react-project-without-create-react-app
-Setting up a new React project from scratch without using create-react-app with react-router v6
+Setting up a new React project from scratch without using create-react-app.
+
+Including react v17, react-router v6, SCSS, Webpack v5
 ```sh
 // Install dependencies
 npm install
